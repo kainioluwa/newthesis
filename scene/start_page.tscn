@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://wpg610nw4xgt"]
+[gd_scene load_steps=6 format=3 uid="uid://wpg610nw4xgt"]
 
-[ext_resource type="Script" uid="uid://cfwlqcuc4nj0q" path="res://scripts/player1.gd" id="1_v2ven"]
+[ext_resource type="PackedScene" uid="uid://cmqus20pob1vy" path="res://scene/player.tscn" id="1_ymgvx"]
+[ext_resource type="PackedScene" uid="uid://ch8u7fv0juqlc" path="res://meshes/test_level.glb" id="2_ymgvx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_b0ml5"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -15,14 +16,6 @@ sky = SubResource("Sky_v2ven")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v2ven"]
-albedo_color = Color(0.223131, 0.567647, 0.279491, 1)
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ymgvx"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vmxbn"]
-albedo_color = Color(0.160784, 1, 1, 1)
-
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -32,23 +25,7 @@ environment = SubResource("Environment_ymgvx")
 transform = Transform3D(-0.866025, -0.433013, 0.25, -0.0789153, 0.612106, 0.786828, -0.493733, 0.661684, -0.564271, 0, 0, 0)
 shadow_enabled = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-use_collision = true
-size = Vector3(10, 1, 10)
-material = SubResource("StandardMaterial3D_v2ven")
+[node name="Player" parent="." instance=ExtResource("1_ymgvx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1944, 0)
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-script = ExtResource("1_v2ven")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00197792, 1.50605, 0.249206)
-shape = SubResource("CapsuleShape3D_ymgvx")
-debug_color = Color(0.120484, 0.578418, 0.787201, 0.42)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="CharacterBody3D"]
-transform = Transform3D(0.793884, 0, -0.608069, 0, 1, 0, 0.608069, 0, 0.793884, 3.17369, 1.57775, 2.34002)
-size = Vector3(1, 2, 1)
-material = SubResource("StandardMaterial3D_vmxbn")
-
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
-transform = Transform3D(0.96584, 0, 0.259139, 0, 1, 0, -0.259139, 0, 0.96584, 2.48556, 1.90363, 12.336)
+[node name="test_level" parent="." instance=ExtResource("2_ymgvx")]
